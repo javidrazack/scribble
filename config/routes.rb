@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'home#index'
-
   resources :notes
+
+  authenticated :user do
+    root 'notes#index', as: "authenticated_root"
+  end
+  
+  root 'home#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
